@@ -1,12 +1,22 @@
-import React, {Component} from 'react';
-import Login from "./Login.js"
-import Dashboard from './DasboardTemp.js';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
-const code = new URLSearchParams(window.location.search).get('access_token')
-class App extends Component {
-  render() {
-    return( code ? <Dashboard code = {code}/> : <Login/>)
-  }
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
