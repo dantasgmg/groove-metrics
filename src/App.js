@@ -5,15 +5,18 @@ import {
   Route,
 } from "react-router-dom";
 
+import Welcome from "./Pages/Welcome";
 import Home from "./Pages/Home";
-import Login from "./Pages/Login";
+
+const code = new URLSearchParams(window.location.search).get('code')
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Welcome/>} />
+        {/* Separar acesso das rodas baseado no code */}
+        <Route path="/home" element={<Home code = {code}/>} />
       </Routes>
     </Router>
   );
