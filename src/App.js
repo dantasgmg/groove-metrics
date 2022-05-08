@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
 } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -28,7 +29,8 @@ function App() {
       <CssBaseline />
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route exact path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/match_playlists" element={<MatchPlaylists />} />

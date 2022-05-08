@@ -15,10 +15,46 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from "@mui/material/Avatar";
 import { HomeVariant, ChartBar, PlaylistMusic, AccountGroup, Cog, AccountCircle } from "mdi-material-ui"
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+
+
+
+
 
 const drawerWidth = 260;
 
 export default function Insights() {
+
+    
+const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
+
+  const [token, setToken] = useState("");
+  const [data, setData] = useState({});
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      setToken(localStorage.getItem("accessToken"));
+    }
+  }, []);
+
+  const handleGetPlaylists = () => {
+    axios
+      .get(PLAYLISTS_ENDPOINT, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -31,7 +67,10 @@ export default function Insights() {
         setAnchorEl(null);
     };
 
+
+
     return (
+
         <Box sx={{ display: 'flex' }}>
             <AppBar
                 position="fixed"
@@ -69,7 +108,7 @@ export default function Insights() {
                         onClose={handleClose}
                     >
                         <MenuItem onClick={handleClose}>Reset password</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={() => { navigate("/", { replace: true }) }}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
             </AppBar>
@@ -97,7 +136,7 @@ export default function Insights() {
                     <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
                 </Box>
                 <List>
-                    <ListItem button onClick={() => { navigate("/", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
                             <HomeVariant />
                         </ListItemIcon>
@@ -144,6 +183,9 @@ export default function Insights() {
             >
                 <Toolbar />
                 <Typography variant="h3">Charts</Typography>
+
+                <MenuItem onClick={handleGetPlaylists}>Playlists</MenuItem>
+                {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
             </Box>
         </Box>
     );

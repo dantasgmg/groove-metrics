@@ -69,7 +69,7 @@ export default function Settings() {
                         onClose={handleClose}
                     >
                         <MenuItem onClick={handleClose}>Reset password</MenuItem>
-                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                        <MenuItem onClick={() => { navigate("/", { replace: true }) }}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
             </AppBar>
@@ -97,7 +97,7 @@ export default function Settings() {
                     <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
                 </Box>
                 <List>
-                    <ListItem button onClick={() => { navigate("/", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
                             <HomeVariant />
                         </ListItemIcon>
