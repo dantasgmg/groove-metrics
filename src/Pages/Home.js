@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from "react";
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
@@ -18,7 +19,32 @@ import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 260;
 
+const getReturnedParamsFromSpotifyAuth = (hash) => {
+    const stringAfterHashtag = hash.substring(1);
+    const paramsInUrl = stringAfterHashtag.split("&");
+    const paramsSplitUp = paramsInUrl.reduce((accumulater, currentValue) => {
+    const [key, value] = currentValue.split("=");
+    accumulater[key] = value;
+    return accumulater;
+  }, {});
+
+  return paramsSplitUp;
+};
+
 export default function Home() {
+
+    useEffect(() => {
+        if (window.location.hash) {
+            const { access_token, expires_in, token_type } =
+            getReturnedParamsFromSpotifyAuth(window.location.hash);
+            localStorage.clear();    
+            localStorage.setItem("accessToken", access_token);
+            localStorage.setItem("tokenType", token_type);
+            localStorage.setItem("expiresIn", expires_in);
+        }
+        console.log(localStorage.getItem("accessToken"));
+    });
+
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);

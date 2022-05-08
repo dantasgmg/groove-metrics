@@ -22,7 +22,6 @@ const drawerWidth = 260;
 
 export default function Insights() {
 
-    
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
 
   const [token, setToken] = useState("");
@@ -61,8 +60,6 @@ const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
     const handleClose = () => {
         setAnchorEl(null);
     };
-
-
 
     return (
 
