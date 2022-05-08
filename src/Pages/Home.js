@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useEffect } from "react";
+import axios from 'axios';
+import { useEffect, useState } from "react";
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
@@ -19,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 260;
 
+const PROFILE_ENDPOINT = "https://api.spotify.com/v1/me";
+
 const getReturnedParamsFromSpotifyAuth = (hash) => {
     const stringAfterHashtag = hash.substring(1);
     const paramsInUrl = stringAfterHashtag.split("&");
@@ -33,6 +36,9 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
 
 export default function Home() {
 
+    const [token, setToken] = useState("");
+    const [data, setData] = useState({});
+
     useEffect(() => {
         if (window.location.hash) {
             const { access_token, expires_in, token_type } =
@@ -41,8 +47,24 @@ export default function Home() {
             localStorage.setItem("accessToken", access_token);
             localStorage.setItem("tokenType", token_type);
             localStorage.setItem("expiresIn", expires_in);
+
+            if(localStorage.getItem("accessToken")){
+                setToken(localStorage.getItem("accessToken"));
+            }
+
+            axios.get(PROFILE_ENDPOINT, {
+                headers:{ 
+                    Authorization: "Bearer " + token,
+                },
+            })
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
         }
-        console.log(localStorage.getItem("accessToken"));
     });
 
     const navigate = useNavigate();
@@ -120,8 +142,9 @@ export default function Home() {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                    <Avatar sx={{ width: 160, height: 160 }}> </Avatar>
                 </Box>
+                    <Typography variant="h5" align = "center"> User Name </Typography>
                 <List>
                     <ListItem button selected onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
