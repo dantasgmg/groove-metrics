@@ -14,7 +14,6 @@ import Login from "./Pages/Login";
 import Insights from "./Pages/Insights";
 import MatchPlaylists from "./Pages/MatchPlaylists";
 import MatchListeners from "./Pages/MatchListeners";
-import Settings from "./Pages/Settings";
 
 const theme = createTheme({
   palette: {
@@ -35,7 +34,6 @@ function App() {
           <Route path="/insights" element={<Insights />} />
           <Route path="/match_playlists" element={<MatchPlaylists />} />
           <Route path="/match_listeners" element={<MatchListeners />} />
-          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
     </ThemeProvider>

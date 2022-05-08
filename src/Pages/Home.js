@@ -36,7 +36,6 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
 
 export default function Home() {
 
-    const [token, setToken] = useState("");
     const [data, setData] = useState({});
 
     useEffect(() => {
@@ -49,9 +48,22 @@ export default function Home() {
             localStorage.setItem("expiresIn", expires_in);
         }
         if(localStorage.getItem("accessToken")){
-            setToken(localStorage.getItem("accessToken"));
-        }
 
+            axios.get(PROFILE_ENDPOINT, {
+                headers:{ 
+                    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((response) => {
+                setData(response.data);
+                if(response.data){
+                    define_globals(response.data);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
     }, []);
     
     const navigate = useNavigate();
@@ -66,20 +78,10 @@ export default function Home() {
         setAnchorEl(null);
     };
 
-    const profile_request = () => {
-        axios.get(PROFILE_ENDPOINT, {
-            headers:{ 
-                Authorization: "Bearer " + token,
-            },
-        })
-        .then((response) => {
-            console.log(response.data)
-            setData(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    }
+    const define_globals = (data) => {
+        localStorage.setItem("profileImage", data.images[0].url);
+        localStorage.setItem("profileName", data.display_name);
+    } 
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -144,9 +146,9 @@ export default function Home() {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <Avatar sx={{ width: 160, height: 160 }}> </Avatar>
+                    <Avatar sx={{ width: 160, height: 160 }} src={localStorage.getItem("profileImage")}>  </Avatar>
                 </Box>
-                    <Typography variant="h5" align = "center"> User Name </Typography>
+                    <Typography variant="h5" align = "center"> {localStorage.getItem("profileName")} </Typography>
                 <List>
                     <ListItem button selected onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
@@ -194,7 +196,6 @@ export default function Home() {
                 }}
             >
                 <Toolbar />
-                <MenuItem onClick={profile_request}>TESTE</MenuItem>
                 <Typography variant="h3">Last Week</Typography>
                 <Typography variant="h3">Last Month</Typography>
                 <Typography variant="h3">Charts</Typography>

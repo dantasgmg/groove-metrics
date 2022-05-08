@@ -15,40 +15,10 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from "@mui/material/Avatar";
 import { HomeVariant, ChartBar, PlaylistMusic, AccountGroup, Cog, AccountCircle } from "mdi-material-ui"
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 const drawerWidth = 260;
 
 export default function Insights() {
-
-const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
-
-  const [token, setToken] = useState("");
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      setToken(localStorage.getItem("accessToken"));
-    }
-  }, []);
-
-  const handleGetPlaylists = () => {
-    axios
-      .get(PLAYLISTS_ENDPOINT, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -62,7 +32,6 @@ const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
     };
 
     return (
-
         <Box sx={{ display: 'flex' }}>
             <AppBar
                 position="fixed"
@@ -100,7 +69,7 @@ const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
                         onClose={handleClose}
                     >
                         <MenuItem onClick={handleClose}>Reset password</MenuItem>
-                        <MenuItem onClick={() => { navigate("/", { replace: true }) }}>Logout</MenuItem>
+                        <MenuItem onClick={handleClose}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
             </AppBar>
@@ -125,10 +94,11 @@ const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                    <Avatar sx={{ width: 160, height: 160 }} src={localStorage.getItem("profileImage")}>  </Avatar>
                 </Box>
+                    <Typography variant="h5" align = "center"> {localStorage.getItem("profileName")} </Typography>
                 <List>
-                    <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/", { replace: true }) }}>
                         <ListItemIcon>
                             <HomeVariant />
                         </ListItemIcon>
@@ -175,9 +145,6 @@ const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
             >
                 <Toolbar />
                 <Typography variant="h3">Charts</Typography>
-
-                <MenuItem onClick={handleGetPlaylists}>Playlists</MenuItem>
-                {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
             </Box>
         </Box>
     );

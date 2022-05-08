@@ -94,8 +94,9 @@ export default function MatchPlaylists() {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                    <Avatar sx={{ width: 160, height: 160 }} src={localStorage.getItem("profileImage")}>  </Avatar>
                 </Box>
+                    <Typography variant="h5" align = "center"> {localStorage.getItem("profileName")} </Typography>
                 <List>
                     <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
