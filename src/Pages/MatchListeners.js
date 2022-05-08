@@ -13,8 +13,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import IconButton from '@mui/material/IconButton';
 import Avatar from "@mui/material/Avatar";
-import { HomeVariant, ChartBar, PlaylistMusic, AccountGroup, Cog, AccountCircle } from "mdi-material-ui"
+import { HomeVariant, ChartBar, PlaylistMusic, AccountGroup, Cog, AccountCircle, Cancel, Headphones } from "mdi-material-ui";
 import { useNavigate } from "react-router-dom";
+import ReactCardCarousel from "react-card-carousel";
+import Paper from "@mui/material/Paper";
+import Fab from '@mui/material/Fab';
+import Grid from "@mui/material/Grid";
 
 const drawerWidth = 260;
 
@@ -144,6 +148,137 @@ export default function MatchListeners() {
             >
                 <Toolbar />
                 <Typography variant="h3">Listener Matching</Typography>
+                <Box sx={{
+                    position: "relative",
+                    height: 500,
+                    width: "100%",
+                    display: "flex",
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "middle",
+                }}>
+                    <ReactCardCarousel autoplay={false}>
+                        <Paper sx={{
+                            height: "auto",
+                            width: 300,
+                            padding: "40px",
+                            boxSizing: "border-box",
+                        }}>
+                            <Box sx={{
+                                mt: 3,
+                                mb: 3,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                            </Box>
+                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Nome, Idade</Typography>
+                            <Grid container>
+                                <Grid item sx={{
+                                    display: "flex",
+                                    justifyContent: "left",
+                                }}
+                                    xs={6}>
+                                    <Fab>
+                                        <Cancel />
+                                    </Fab>
+                                </Grid>
+                                <Grid item sx={{
+                                    display: "flex",
+                                    justifyContent: "right",
+                                }} xs={6}>
+                                    <Fab>
+                                        <Headphones />
+                                    </Fab>
+                                </Grid>
+                            </Grid>
+                            <Typography sx={{ mt: 3 }}>
+                                Curte:
+                            </Typography>
+                        </Paper>
+
+                        <Paper sx={{
+                            height: "auto",
+                            width: 300,
+                            padding: "40px",
+                            boxSizing: "border-box",
+                        }}>
+                            <Box sx={{
+                                mt: 3,
+                                mb: 3,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                            </Box>
+                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Nome, Idade</Typography>
+                            <Grid container>
+                                <Grid item sx={{
+                                    display: "flex",
+                                    justifyContent: "left",
+                                }}
+                                    xs={6}>
+                                    <Fab>
+                                        <Cancel />
+                                    </Fab>
+                                </Grid>
+                                <Grid item sx={{
+                                    display: "flex",
+                                    justifyContent: "right",
+                                }} xs={6}>
+                                    <Fab>
+                                        <Headphones />
+                                    </Fab>
+                                </Grid>
+                            </Grid>
+                            <Typography sx={{ mt: 3 }}>
+                                Curte:
+                            </Typography>
+                        </Paper>
+
+                        <Paper sx={{
+                            height: "auto",
+                            width: 300,
+                            padding: "40px",
+                            boxSizing: "border-box",
+                        }}>
+                            <Box sx={{
+                                mt: 3,
+                                mb: 3,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                            </Box>
+                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Nome, Idade</Typography>
+                            <Grid container>
+                                <Grid item sx={{
+                                    display: "flex",
+                                    justifyContent: "left",
+                                }}
+                                    xs={6}>
+                                    <Fab>
+                                        <Cancel />
+                                    </Fab>
+                                </Grid>
+                                <Grid item sx={{
+                                    display: "flex",
+                                    justifyContent: "right",
+                                }} xs={6}>
+                                    <Fab>
+                                        <Headphones />
+                                    </Fab>
+                                </Grid>
+                            </Grid>
+                            <Typography sx={{ mt: 3 }}>
+                                Curte:
+                            </Typography>
+                        </Paper>
+                    </ReactCardCarousel>
+                </Box>
             </Box>
         </Box>
     );
