@@ -43,30 +43,17 @@ export default function Home() {
         if (window.location.hash) {
             const { access_token, expires_in, token_type } =
             getReturnedParamsFromSpotifyAuth(window.location.hash);
-            localStorage.clear();    
+            localStorage.clear();
             localStorage.setItem("accessToken", access_token);
             localStorage.setItem("tokenType", token_type);
             localStorage.setItem("expiresIn", expires_in);
-
-            if(localStorage.getItem("accessToken")){
-                setToken(localStorage.getItem("accessToken"));
-            }
-
-            axios.get(PROFILE_ENDPOINT, {
-                headers:{ 
-                    Authorization: "Bearer " + token,
-                },
-            })
-            .then((response) => {
-                setData(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
         }
-    });
+        if(localStorage.getItem("accessToken")){
+            setToken(localStorage.getItem("accessToken"));
+        }
 
+    }, []);
+    
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -78,6 +65,21 @@ export default function Home() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const profile_request = () => {
+        axios.get(PROFILE_ENDPOINT, {
+            headers:{ 
+                Authorization: "Bearer " + token,
+            },
+        })
+        .then((response) => {
+            console.log(response.data)
+            setData(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -192,6 +194,7 @@ export default function Home() {
                 }}
             >
                 <Toolbar />
+                <MenuItem onClick={profile_request}>TESTE</MenuItem>
                 <Typography variant="h3">Last Week</Typography>
                 <Typography variant="h3">Last Month</Typography>
                 <Typography variant="h3">Charts</Typography>
