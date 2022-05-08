@@ -130,12 +130,6 @@ export default function MatchListeners() {
                         <ListItemText primary={"Match Listeners"} />
                     </ListItem>
 
-                    <ListItem button onClick={() => { navigate("/settings", { replace: true }) }}>
-                        <ListItemIcon>
-                            <Cog />
-                        </ListItemIcon>
-                        <ListItemText primary={"Settings"} />
-                    </ListItem>
                 </List>
             </Drawer>
             <Box
