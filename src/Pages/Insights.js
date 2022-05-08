@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 260;
 
-export default function Home() {
+export default function Insights() {
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,7 +39,7 @@ export default function Home() {
             >
                 <Toolbar>
                     <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                        Home
+                        Insights
                     </Typography>
 
                     <IconButton
@@ -97,14 +97,14 @@ export default function Home() {
                     <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
                 </Box>
                 <List>
-                    <ListItem button selected onClick={() => { navigate("/", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/", { replace: true }) }}>
                         <ListItemIcon>
                             <HomeVariant />
                         </ListItemIcon>
                         <ListItemText primary={"Home"} />
                     </ListItem>
 
-                    <ListItem button onClick={() => { navigate("/insights", { replace: true }) }}>
+                    <ListItem button selected onClick={() => { navigate("/insights", { replace: true }) }}>
                         <ListItemIcon>
                             <ChartBar />
                         </ListItemIcon>
@@ -138,13 +138,11 @@ export default function Home() {
                 sx={{
                     height: '100vh',
                     flexGrow: 1,
-                    background: "linear-gradient(180deg, rgba(26,197,83,1) 0%, rgba(26,197,83,0.75) 25%, rgba(26,197,83,0.5) 50%, rgba(26,197,83,0.25) 75%, rgba(26,197,83,0) 100%)",
+                    background: "linear-gradient(180deg, rgba(128,25,216,1) 0%, rgba(128,25,216,0.75) 25%, rgba(128,26,216,0.5) 50%, rgba(128,25,216,0.25) 75%, rgba(128,25,216,0) 100%)",
                     p: 3
                 }}
             >
                 <Toolbar />
-                <Typography variant="h3">Last Week</Typography>
-                <Typography variant="h3">Last Month</Typography>
                 <Typography variant="h3">Charts</Typography>
             </Box>
         </Box>
