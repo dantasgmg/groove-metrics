@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 260;
 
-export default function Home() {
+export default function MatchPlaylists() {
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,7 +39,7 @@ export default function Home() {
             >
                 <Toolbar>
                     <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-                        Home
+                        Match Playlists
                     </Typography>
 
                     <IconButton
@@ -97,7 +97,7 @@ export default function Home() {
                     <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
                 </Box>
                 <List>
-                    <ListItem button selected onClick={() => { navigate("/home", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
                             <HomeVariant />
                         </ListItemIcon>
@@ -111,7 +111,7 @@ export default function Home() {
                         <ListItemText primary={"Insights"} />
                     </ListItem>
 
-                    <ListItem button onClick={() => { navigate("/match_playlists", { replace: true }) }}>
+                    <ListItem button selected onClick={() => { navigate("/match_playlists", { replace: true }) }}>
                         <ListItemIcon>
                             <PlaylistMusic />
                         </ListItemIcon>
@@ -138,14 +138,12 @@ export default function Home() {
                 sx={{
                     height: '100vh',
                     flexGrow: 1,
-                    background: "linear-gradient(180deg, rgba(26,197,83,1) 0%, rgba(26,197,83,0.75) 25%, rgba(26,197,83,0.5) 50%, rgba(26,197,83,0.25) 75%, rgba(26,197,83,0) 100%)",
+                    background: "linear-gradient(180deg, rgba(255,0,0,1) 0%, rgba(255,0,0,0.75) 25%, rgba(255,0,0,0.5) 50%, rgba(255,0,0,0.25) 75%, rgba(255,0,0,0) 100%)",
                     p: 3
                 }}
             >
                 <Toolbar />
-                <Typography variant="h3">Last Week</Typography>
-                <Typography variant="h3">Last Month</Typography>
-                <Typography variant="h3">Charts</Typography>
+                <Typography variant="h3">Playlist Matching</Typography>
             </Box>
         </Box>
     );
