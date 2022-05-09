@@ -15,12 +15,18 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import IconButton from '@mui/material/IconButton';
 import Avatar from "@mui/material/Avatar";
+import ImageListItem  from "@mui/material/ImageListItem"
+import ImageList  from "@mui/material/ImageList"
+import ImageListItemBar  from "@mui/material/ImageListItemBar"
+
 import { HomeVariant, ChartBar, PlaylistMusic, AccountGroup, Cog, AccountCircle } from "mdi-material-ui"
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 260;
 
 const PROFILE_ENDPOINT = "https://api.spotify.com/v1/me";
+const TOP_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10&offset=0"
+const TOP_TRACKS_ENDPOINT_MONTH = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=0"
 
 const getReturnedParamsFromSpotifyAuth = (hash) => {
     const stringAfterHashtag = hash.substring(1);
@@ -35,8 +41,6 @@ const getReturnedParamsFromSpotifyAuth = (hash) => {
 };
 
 export default function Home() {
-
-    const [data, setData] = useState({});
 
     useEffect(() => {
         if (window.location.hash) {
@@ -55,7 +59,6 @@ export default function Home() {
                 },
             })
             .then((response) => {
-                setData(response.data);
                 if(response.data){
                     define_globals(response.data);
                 }
@@ -65,6 +68,42 @@ export default function Home() {
             });
         }
     }, []);
+
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        if(localStorage.getItem("accessToken")){
+            axios.get(TOP_TRACKS_ENDPOINT, {
+                headers:{ 
+                    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+    }, [data]);
+
+    const [data_month, setDataMonth] = useState();
+
+    useEffect(() => {
+        if(localStorage.getItem("accessToken")){
+            axios.get(TOP_TRACKS_ENDPOINT_MONTH, {
+                headers:{ 
+                    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((response) => {
+                setDataMonth(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+    }, [data_month]);
     
     const navigate = useNavigate();
 
@@ -190,7 +229,44 @@ export default function Home() {
             >
                 <Toolbar />
                 <Typography variant="h3">Last Week</Typography>
+                <ImageList sx={{ width: '100%', height: 600 }} cols = { 5 } >
+                    {data?.items ? data.items.map((item, index) =>
+                            (
+                            <ImageListItem key={item.images}>
+                            <img
+                                src={`${item.album.images[1].url}`}
+                                alt={item.name}
+                                loading="lazy"
+                            />
+                            <ImageListItemBar
+                                title= {"#"+ (index+1)+ " " + item.name }
+                                position="side"
+                            />
+                            </ImageListItem>
+                        ))
+                        : null
+                    }
+                    </ImageList>
+                 
                 <Typography variant="h3">Last Month</Typography>
+                <ImageList sx={{ width: '100%', height: 600 }} cols = { 5 } >
+                    {data_month?.items ? data_month.items.map((item, index) =>
+                            (
+                            <ImageListItem key={item.images}>
+                            <img
+                                src={`${item.album.images[1].url}`}
+                                alt={item.name}
+                                loading="lazy"
+                            />
+                            <ImageListItemBar
+                                title= {"#"+ (index+1)+ " " + item.name }
+                                position="side"
+                            />
+                            </ImageListItem>
+                        ))
+                        : null
+                    }
+                    </ImageList>
                 <Typography variant="h3">Charts</Typography>
             </Box>
         </Box>

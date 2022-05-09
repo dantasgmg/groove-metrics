@@ -98,7 +98,7 @@ export default function Insights() {
                 </Box>
                     <Typography variant="h5" align = "center"> {localStorage.getItem("profileName")} </Typography>
                 <List>
-                    <ListItem button onClick={() => { navigate("/", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
                             <HomeVariant />
                         </ListItemIcon>
