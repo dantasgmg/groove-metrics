@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import { Spotify } from "mdi-material-ui";
 import Typography from '@mui/material/Typography';
 import { useNavigate } from "react-router-dom";
-import logo from "../assets/logo4.png"
+import logo from "../assets/logo4.png";
 
 const CLIENT_ID = "79e16bbbdc614756b45bd4230d44c7e0"; // insert your client id here from spotify
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
