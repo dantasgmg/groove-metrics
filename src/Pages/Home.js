@@ -208,6 +208,13 @@ export default function Home() {
                         </ListItemIcon>
                         <ListItemText primary={"Match Playlists"} />
                     </ListItem>
+                    
+                    <ListItem button selected onClick={() => { navigate("/match_listeners", { replace: true }) }}>
+                        <ListItemIcon>
+                            <AccountGroup />
+                        </ListItemIcon>
+                        <ListItemText primary={"Match Listeners"} />
+                    </ListItem>
                 </List>
             </Drawer>
             <Box
