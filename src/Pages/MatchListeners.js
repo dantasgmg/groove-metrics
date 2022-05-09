@@ -72,7 +72,6 @@ export default function MatchListeners() {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>Reset password</MenuItem>
                         <MenuItem onClick={() => { navigate("/", { replace: true }) }}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
@@ -98,8 +97,9 @@ export default function MatchListeners() {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                    <Avatar sx={{ width: 160, height: 160 }} src={localStorage.getItem("profileImage")}>  </Avatar>
                 </Box>
+                    <Typography variant="h5" align = "center"> {localStorage.getItem("profileName")} </Typography>
                 <List>
                     <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
@@ -128,13 +128,6 @@ export default function MatchListeners() {
                         </ListItemIcon>
                         <ListItemText primary={"Match Listeners"} />
                     </ListItem>
-
-                    <ListItem button onClick={() => { navigate("/settings", { replace: true }) }}>
-                        <ListItemIcon>
-                            <Cog />
-                        </ListItemIcon>
-                        <ListItemText primary={"Settings"} />
-                    </ListItem>
                 </List>
             </Drawer>
             <Box
@@ -150,7 +143,7 @@ export default function MatchListeners() {
                 <Typography variant="h3">Listener Matching</Typography>
                 <Box sx={{
                     position: "relative",
-                    height: 500,
+                    height: 550,
                     width: "100%",
                     display: "flex",
                     flex: 1,
@@ -171,9 +164,9 @@ export default function MatchListeners() {
                                 justifyContent: "center",
                                 alignItems: "center",
                             }}>
-                                <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                                <Avatar sx={{ width: 160, height: 160 }} src={"https://www.nme.com/wp-content/uploads/2018/02/Florence-Welch-696x442.jpg"}></Avatar>
                             </Box>
-                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Nome, Idade</Typography>
+                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Florence, 28</Typography>
                             <Grid container>
                                 <Grid item sx={{
                                     display: "flex",
@@ -196,6 +189,12 @@ export default function MatchListeners() {
                             <Typography sx={{ mt: 3 }}>
                                 Curte:
                             </Typography>
+                            <Typography sx={{ mt: 1}}>
+                                Foo Fighters
+                            </Typography>
+                            <Typography sx={{ mt: 1 }}>
+                                The Strokes
+                            </Typography>
                         </Paper>
 
                         <Paper sx={{
@@ -211,9 +210,9 @@ export default function MatchListeners() {
                                 justifyContent: "center",
                                 alignItems: "center",
                             }}>
-                                <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                                <Avatar sx={{ width: 160, height: 160 }} src={"https://i0.wp.com/br.nacaodamusica.com/wp-content/uploads/2017/06/jack-white.jpg"}></Avatar>
                             </Box>
-                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Nome, Idade</Typography>
+                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Jack, 40</Typography>
                             <Grid container>
                                 <Grid item sx={{
                                     display: "flex",
@@ -236,6 +235,12 @@ export default function MatchListeners() {
                             <Typography sx={{ mt: 3 }}>
                                 Curte:
                             </Typography>
+                            <Typography sx={{ mt: 1 }}>
+                                Joe Bonamassa
+                            </Typography>
+                            <Typography sx={{ mt: 1 }}>
+                                David Gilmour
+                            </Typography>
                         </Paper>
 
                         <Paper sx={{
@@ -251,9 +256,9 @@ export default function MatchListeners() {
                                 justifyContent: "center",
                                 alignItems: "center",
                             }}>
-                                <Avatar sx={{ width: 160, height: 160 }}>H</Avatar>
+                                <Avatar sx={{ width: 160, height: 160 }} src = {"https://i0.wp.com/altamont.pt/wp-content/uploads/2018/06/Daniel-Caesar.jpg?resize=640%2C450&ssl=1"}></Avatar>
                             </Box>
-                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Nome, Idade</Typography>
+                            <Typography variant="h5" align="center" sx={{ mb: 3 }}>Daniel, 23</Typography>
                             <Grid container>
                                 <Grid item sx={{
                                     display: "flex",
@@ -275,6 +280,12 @@ export default function MatchListeners() {
                             </Grid>
                             <Typography sx={{ mt: 3 }}>
                                 Curte:
+                            </Typography>
+                            <Typography sx={{ mt: 1 }}>
+                                Jacob Collier
+                            </Typography>
+                            <Typography sx={{ mt: 1 }}>
+                                HER
                             </Typography>
                         </Paper>
                     </ReactCardCarousel>

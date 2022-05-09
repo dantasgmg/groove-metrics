@@ -76,6 +76,7 @@ export default function Insights() {
             },
           })
           .then((response) => {
+            setData_f(null);
             setData_f(response.data);
             setTypet(consumable);
           })
@@ -177,7 +178,7 @@ export default function Insights() {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>Reset password</MenuItem>
+
                         <MenuItem onClick={() => { navigate("/", { replace: true }) }}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
@@ -248,65 +249,51 @@ export default function Insights() {
             >
             <Toolbar />
                 <Typography variant="h3">Descubra seu som!</Typography>
-                <Grid container sx={{ mb: 0 }} direction = {"row"}>
+                
+                <Grid container sx={{ mb: 0, mt : 2 }} direction = {"row"}>
                     <Grid item xs={12} sm = {12} md = {6} lg = {6} >
                         <Typography variant="h4">Top #1 Artist</Typography>
-
-                        <ImageList sx={{ width: '190%', height:"75%"}} >
-                            {data_a?.items ? data_a.items.map((item) =>  
+                        <>
+                        {data_a?.items ? data_a.items.map((item) =>  
                                     (
-                                    <ImageListItem key={item.images} >
-                                    <img
-                                        src={`${item.images[0].url}?w=650&h=650&fit=crop&auto=format`}
+                                    <img 
+                                        src={`${item.images[1].url}`}
                                         alt={item.name}
-                                        loading="lazy"
-                                    />
-                                    <ImageListItemBar
-                                        title={item.name}
-                                        position="side"
-                                    />
-                                    </ImageListItem>
+                                        width = "320" height= "320" />
                                 ))
                                 : null}
-                        </ImageList>
+                        </>
                     </Grid>
                     <Grid item xs={12} sm = {12} md = {6} lg = {6} >
-                        <Typography variant="h4">Top #1 Music</Typography>
-                        <ImageList sx={{ width: "190%", height: "75%"}} >
-                            {data_t?.items ? data_t.items.map((item) =>  
+                        <Typography variant="h4">Top #1 Track</Typography>
+                        <>
+                        {data_t?.items ? data_t.items.map((item) =>  
                                     (
-                                    <ImageListItem key={item.images} >
-                                    <img
-                                        src={`${item.album.images[0].url}?w=650&h=650&fit=crop&auto=format`}
+                                    <img 
+                                        src={`${item.album.images[1].url}`}
                                         alt={item.name}
-                                        loading="lazy"
-                                    />
-                                    <ImageListItemBar
-                                        title={item.name}
-                                        position="side"
-                                    />
-                                    </ImageListItem>
+                                        width = "320" height= "320"/>
                                 ))
                                 : null}
-                        </ImageList>
+                        </>
                     </Grid>
                 </Grid>
                 <Grid container sx={{ mb: 8 }}>
                     <Grid xs={12} sm = {12} md = {12} lg = {12} >
-                        <Typography variant="h4">Favourite episodes</Typography>
+                        <Typography variant="h4">Favourite shows</Typography>
                         
                         <ImageList sx={{ width: "100%", height: "100%"}} cols = {5}>
                             {data_p?.items ? data_p.items.map((item) =>  
                                     (
                                     <ImageListItem key={item.images} >
                                     <img
-                                        src={`${item.show.images[1].url}?w=320&h=320&fit=crop&auto=format`}
+                                        src={`${item.show.images[1].url}`}
                                         alt={item.name}
                                         loading="lazy"
                                         position="right"
                                     />
                                     <ImageListItemBar
-                                        title={item.name}
+                                        title={item.show.name}
                                         position="below"
                                     />
                                     </ImageListItem>
@@ -317,7 +304,7 @@ export default function Insights() {
                 </Grid>
                 <Grid container >
                     <Grid xs={12} sm = {12} md = {12} lg = {12} >
-                        <Typography variant="h4">Whant find out your sound?</Typography>    
+                        <Typography variant="h4">Do you wanna discover your sound?</Typography>    
                         <div>
                             <FormControl sx={{ m: 1, minWidth: "25%" }}>
                                 <InputLabel id="demo-simple-select-label">Period</InputLabel>
@@ -349,12 +336,12 @@ export default function Insights() {
                                 </Select>
                             </FormControl>
                             <FormControl sx={{ m: 1, minWidth: "25%"}}>
-                                <InputLabel id="demo-simple-select-label">Amount</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Ammount</InputLabel>
                                 <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={quant}
-                                label="Amount"
+                                label="Ammount"
                                 defaultValue={"10"}
                                 onChange={handleChange_quant}
                                 >
@@ -372,7 +359,7 @@ export default function Insights() {
                         <ImageList sx={{ width: "100%", height: "100%"}} cols = {5}>
                             {data_f?.items ? data_f.items.map((item) =>  
                                     (
-                                    <ImageListItem key={item.images} >
+                                    <ImageListItem key={typet == "artists" ? item.images : item.album.images } >
                                     <img
                                         src={typet == "artists" ? `${item.images[1].url}?w=320&h=320&fit=crop&auto=format` :`${item.album.images[0].url}?w=320&h=320&fit=crop&auto=format` }
                                         alt={item.name}
