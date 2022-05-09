@@ -13,6 +13,8 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Insights from "./Pages/Insights";
 import MatchPlaylists from "./Pages/MatchPlaylists";
+import MatchListeners from "./Pages/MatchListeners";
+
 
 const theme = createTheme({
   palette: {
@@ -32,6 +34,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/insights" element={<Insights />} />
           <Route path="/match_playlists" element={<MatchPlaylists />} />
+          <Route path="/match_listeners" element={<MatchListeners />} />
+
         </Routes>
       </Router>
     </ThemeProvider>

@@ -208,6 +208,13 @@ export default function Home() {
                         </ListItemIcon>
                         <ListItemText primary={"Match Playlists"} />
                     </ListItem>
+                    
+                    <ListItem button selected onClick={() => { navigate("/match_listeners", { replace: true }) }}>
+                        <ListItemIcon>
+                            <AccountGroup />
+                        </ListItemIcon>
+                        <ListItemText primary={"Match Listeners"} />
+                    </ListItem>
                 </List>
             </Drawer>
             <Box
@@ -220,7 +227,8 @@ export default function Home() {
                 }}
             >
                 <Toolbar />
-                <Typography variant="h3">Last Week</Typography>
+                <Typography variant="h3">Tracks you've loved:</Typography>
+                <Typography sx={{mt : 2}} variant="h4">Last Week</Typography>
                 <ImageList sx={{ width: '100%', height: 600 }} cols = { 5 } >
                     {data?.items ? data.items.map((item, index) =>
                             (
@@ -240,7 +248,7 @@ export default function Home() {
                     }
                     </ImageList>
                  
-                <Typography variant="h3">Last Month</Typography>
+                <Typography variant="h4">Last Month</Typography>
                 <ImageList sx={{ width: '100%', height: 600 }} cols = { 5 } >
                     {data_month?.items ? data_month.items.map((item, index) =>
                             (
@@ -259,7 +267,6 @@ export default function Home() {
                         : null
                     }
                     </ImageList>
-                <Typography variant="h3">Charts</Typography>
             </Box>
         </Box>
     );
