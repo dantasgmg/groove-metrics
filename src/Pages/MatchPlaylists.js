@@ -68,7 +68,6 @@ export default function MatchPlaylists() {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>Reset password</MenuItem>
                         <MenuItem onClick={() => { navigate("/", { replace: true }) }}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
@@ -96,7 +95,7 @@ export default function MatchPlaylists() {
                 }}>
                     <Avatar sx={{ width: 160, height: 160 }} src={localStorage.getItem("profileImage")}>  </Avatar>
                 </Box>
-                    <Typography variant="h5" align = "center"> {localStorage.getItem("profileName")} </Typography>
+                <Typography variant="h5" align="center"> {localStorage.getItem("profileName")} </Typography>
                 <List>
                     <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
@@ -117,13 +116,6 @@ export default function MatchPlaylists() {
                             <PlaylistMusic />
                         </ListItemIcon>
                         <ListItemText primary={"Match Playlists"} />
-                    </ListItem>
-
-                    <ListItem button onClick={() => { navigate("/match_listeners", { replace: true }) }}>
-                        <ListItemIcon>
-                            <AccountGroup />
-                        </ListItemIcon>
-                        <ListItemText primary={"Match Listeners"} />
                     </ListItem>
                 </List>
             </Drawer>

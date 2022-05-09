@@ -120,7 +120,6 @@ export default function Home() {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>Reset password</MenuItem>
                         <MenuItem onClick={() => { navigate("/", { replace: true }) }}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
@@ -169,13 +168,6 @@ export default function Home() {
                             <PlaylistMusic />
                         </ListItemIcon>
                         <ListItemText primary={"Match Playlists"} />
-                    </ListItem>
-
-                    <ListItem button onClick={() => { navigate("/match_listeners", { replace: true }) }}>
-                        <ListItemIcon>
-                            <AccountGroup />
-                        </ListItemIcon>
-                        <ListItemText primary={"Match Listeners"} />
                     </ListItem>
                 </List>
             </Drawer>

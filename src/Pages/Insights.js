@@ -68,7 +68,6 @@ export default function Insights() {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                        <MenuItem onClick={handleClose}>Reset password</MenuItem>
                         <MenuItem onClick={handleClose}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>
@@ -96,9 +95,9 @@ export default function Insights() {
                 }}>
                     <Avatar sx={{ width: 160, height: 160 }} src={localStorage.getItem("profileImage")}>  </Avatar>
                 </Box>
-                    <Typography variant="h5" align = "center"> {localStorage.getItem("profileName")} </Typography>
+                <Typography variant="h5" align="center"> {localStorage.getItem("profileName")} </Typography>
                 <List>
-                    <ListItem button onClick={() => { navigate("/", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/home", { replace: true }) }}>
                         <ListItemIcon>
                             <HomeVariant />
                         </ListItemIcon>
@@ -118,14 +117,6 @@ export default function Insights() {
                         </ListItemIcon>
                         <ListItemText primary={"Match Playlists"} />
                     </ListItem>
-
-                    <ListItem button onClick={() => { navigate("/match_listeners", { replace: true }) }}>
-                        <ListItemIcon>
-                            <AccountGroup />
-                        </ListItemIcon>
-                        <ListItemText primary={"Match Listeners"} />
-                    </ListItem>
-
                 </List>
             </Drawer>
             <Box
