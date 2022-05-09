@@ -15,6 +15,11 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from "@mui/material/Avatar";
 import { HomeVariant, ChartBar, PlaylistMusic, AccountGroup, Cog, AccountCircle } from "mdi-material-ui"
 import { useNavigate } from "react-router-dom";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Chip from "@mui/material/Chip";
+import TextField from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 260;
 
@@ -130,6 +135,82 @@ export default function MatchPlaylists() {
             >
                 <Toolbar />
                 <Typography variant="h3">Playlist Matching</Typography>
+                <Box mt={3}>
+                    <Box>
+                        <Typography>Escolha sua playlist:</Typography>
+                        <Stack mt={1} direction="row" spacing={1}>
+                            <Chip
+                                avatar={<Avatar alt="Natacha" src="https://i.scdn.co/image/ab6761610000e5eb9a43b87b50cd3d03544bb3e5" />}
+                                label="Eu ainda escuto grunge"
+                                color="primary"
+                            />
+                        </Stack>
+                    </Box>
+                    <Box mt={3}>
+                        <Typography>Escolha sua playlist:</Typography>
+                        <Box mt={1} component="form">
+                            <TextField id="link" label="Link" variant="outlined" defaultValue={"https://open.spotify.com/playlist/37i9dQZF1DX11ghcIxjcjE"} fullWidth disabled />
+                        </Box>
+                    </Box>
+                </Box>
+                <Grid container mt={3}>
+                    <Grid item xs={6}>
+                        <Box sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "column"
+                        }}>
+                            <Typography variant="h5" mb={1}>Grunge Forever</Typography>
+                            <Avatar sx={{ width: 200, height: 200 }} src="https://i.scdn.co/image/ab67706f00000003aad44a9aec7fe4798178994f">  </Avatar>
+                            <Typography mt={1}>By Spotify</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Box sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "column"
+                        }}>
+                            <Typography variant="h5" mb={1}>Eu ainda escuto grunge</Typography>
+                            <Avatar sx={{ width: 200, height: 200 }} src="https://i.scdn.co/image/ab6761610000e5eb9a43b87b50cd3d03544bb3e5">  </Avatar>
+                            <Typography mt={1}>By {localStorage.getItem("profileName")}</Typography>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Box p={3}>
+                            <Typography variant="h4">
+                                Resultados
+                            </Typography>
+                            <Box sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}>
+                                <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+                                    <CircularProgress variant="determinate" size={300} value={86} />
+                                    <Box
+                                        sx={{
+                                            top: 0,
+                                            left: 0,
+                                            bottom: 0,
+                                            right: 0,
+                                            position: 'absolute',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        <Typography variant="h4" component="div" color="text.secondary">
+                                            67% Match
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
             </Box>
         </Box>
     );
