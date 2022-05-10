@@ -25,7 +25,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 260;
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
-var randvalue = Math.floor((Math.random() * 100) + 1);
+var randvalue = 0;
 export default function MatchPlaylists() {
 
     const [data, setData] = useState({});
