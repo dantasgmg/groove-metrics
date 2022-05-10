@@ -25,8 +25,8 @@ import { useNavigate } from "react-router-dom";
 const drawerWidth = 260;
 
 const PROFILE_ENDPOINT = "https://api.spotify.com/v1/me";
-const TOP_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10&offset=0"
-const TOP_TRACKS_ENDPOINT_MONTH = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=0"
+const TOP_TRACKS_ENDPOINT = "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=5&offset=0"
+const TOP_TRACKS_ENDPOINT_MONTH = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=5&offset=0"
 
 const getReturnedParamsFromSpotifyAuth = (hash) => {
     const stringAfterHashtag = hash.substring(1);
@@ -209,7 +209,7 @@ export default function Home() {
                         <ListItemText primary={"Match Playlists"} />
                     </ListItem>
                     
-                    <ListItem button selected onClick={() => { navigate("/match_listeners", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/match_listeners", { replace: true }) }}>
                         <ListItemIcon>
                             <AccountGroup />
                         </ListItemIcon>

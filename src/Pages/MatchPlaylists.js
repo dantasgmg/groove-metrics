@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useEffect, useState } from "react";
+import axios from 'axios';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
@@ -22,8 +24,25 @@ import TextField from '@mui/material/TextField';
 import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 260;
-
+const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
+const randvalue = Math.floor((Math.random() * 100) + 1);
 export default function MatchPlaylists() {
+    const [data, setData] = useState({});
+    useEffect(() => {
+        if(localStorage.getItem("accessToken")){
+            axios.get(PLAYLISTS_ENDPOINT, {
+                headers:{ 
+                    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }
+    }, []);
     const navigate = useNavigate();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,6 +55,8 @@ export default function MatchPlaylists() {
         setAnchorEl(null);
     };
 
+    const [imageurl, setImageurl] = React.useState('');
+    console.log(imageurl);
     return (
         <Box sx={{ display: 'flex' }}>
             <AppBar
@@ -122,7 +143,7 @@ export default function MatchPlaylists() {
                         </ListItemIcon>
                         <ListItemText primary={"Match Playlists"} />
                     </ListItem>
-                    <ListItem button selected onClick={() => { navigate("/match_listeners", { replace: true }) }}>
+                    <ListItem button onClick={() => { navigate("/match_listeners", { replace: true }) }}>
                         <ListItemIcon>
                             <AccountGroup />
                         </ListItemIcon>
@@ -142,18 +163,23 @@ export default function MatchPlaylists() {
                 <Toolbar />
                 <Typography variant="h3">Playlist Matching</Typography>
                 <Box mt={3}>
-                    <Box>
+                    <Box >
                         <Typography>Escolha sua playlist:</Typography>
-                        <Stack mt={1} direction="row" spacing={1}>
-                            <Chip
-                                avatar={<Avatar alt="Natacha" src="https://i.scdn.co/image/ab6761610000e5eb9a43b87b50cd3d03544bb3e5" />}
-                                label="Eu ainda escuto grunge"
-                                color="primary"
-                            />
+                        <Stack mt={1} direction="row" spacing={1} sx={{width: 1190, overflow: "auto"}} >
+                        {data?.items ? data.items.map((item) =>  
+                                    (
+                                    <Chip
+                                        avatar={<Avatar alt="Natacha" src={item.images.length >= 1 ? `${item.images[0].url}` : null} />}
+                                        label={item? item.name : null}
+                                        color="primary"
+                                        onClick={() => {setImageurl(item)}}
+                                    />
+                                ))
+                                : null}             
                         </Stack>
                     </Box>
                     <Box mt={3}>
-                        <Typography>Escolha sua playlist:</Typography>
+                        <Typography>Escolha a playlist pública:</Typography>
                         <Box mt={1} component="form">
                             <TextField id="link" label="Link" variant="outlined" defaultValue={"https://open.spotify.com/playlist/37i9dQZF1DX11ghcIxjcjE"} fullWidth disabled />
                         </Box>
@@ -179,8 +205,10 @@ export default function MatchPlaylists() {
                             alignItems: "center",
                             flexDirection: "column"
                         }}>
-                            <Typography variant="h5" mb={1}>Eu ainda escuto grunge</Typography>
-                            <Avatar sx={{ width: 200, height: 200 }} src="https://i.scdn.co/image/ab6761610000e5eb9a43b87b50cd3d03544bb3e5">  </Avatar>
+                            <>{data?.items ? <Typography variant="h5" mb={1}>{imageurl? imageurl.name : null}</Typography> : null}
+                            </>
+            
+                            <Avatar sx={{ width: 200, height: 200 }} src={imageurl ? imageurl.images.length >= 1 ? `${imageurl.images[0].url}` :null :null}>  </Avatar>
                             <Typography mt={1}>By {localStorage.getItem("profileName")}</Typography>
                         </Box>
                     </Grid>
@@ -195,7 +223,7 @@ export default function MatchPlaylists() {
                                 alignItems: "center"
                             }}>
                                 <Box sx={{ position: 'relative', display: 'inline-flex' }}>
-                                    <CircularProgress variant="determinate" size={300} value={86} />
+                                    <CircularProgress variant="determinate" size={300} value={randvalue} />
                                     <Box
                                         sx={{
                                             top: 0,
@@ -209,7 +237,7 @@ export default function MatchPlaylists() {
                                         }}
                                     >
                                         <Typography variant="h4" component="div" color="text.secondary">
-                                            67% Match
+                                            {randvalue}% Match
                                         </Typography>
                                     </Box>
                                 </Box>

@@ -86,8 +86,6 @@ export default function Insights() {
       };
     
     useEffect(() => {
-
-
         if(localStorage.getItem("accessToken")){
 
             axios.get(TRACKS_ENDPOINT, {
@@ -248,7 +246,7 @@ export default function Insights() {
                 }}
             >
             <Toolbar />
-                <Typography variant="h3">Descubra seu som!</Typography>
+                <Typography variant="h3">Discover your sound!</Typography>
                 
                 <Grid container sx={{ mb: 0, mt : 2 }} direction = {"row"}>
                     <Grid item xs={12} sm = {12} md = {6} lg = {6} >
@@ -304,7 +302,7 @@ export default function Insights() {
                 </Grid>
                 <Grid container >
                     <Grid xs={12} sm = {12} md = {12} lg = {12} >
-                        <Typography variant="h4">Do you wanna discover your sound?</Typography>    
+                        <Typography variant="h4">Do you wanna discover more of your sound?</Typography>    
                         <div>
                             <FormControl sx={{ m: 1, minWidth: "25%" }}>
                                 <InputLabel id="demo-simple-select-label">Period</InputLabel>
