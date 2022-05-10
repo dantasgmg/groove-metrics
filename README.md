@@ -8,13 +8,7 @@
 ### Para testar o app será necessário logar no Spotify da seguinte maneira:
 
 1. Vá para o site: https://accounts.spotify.com/pt-BR/login/?continue=https%3A//open.spotify.com/__noul__%3Fl2l%3D1%26nd%3D1&_locale=en-US
-2. Clique em: Continuar com o Google
-3. Insira as credenciais:
 
-	Email: metricsgroove@gmail.com
-	Senha: groovemetrics
-
-Criamos este email para servir de teste para acesso ao Spotify.
 Se quiser testar o app com sua conta pessoal você deverá enviar seu email cadastrado no spotify para um dos seguintes emails:
 
 gabriel.dantas@aluno.ufabc.edu.br
