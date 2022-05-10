@@ -25,8 +25,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 260;
 const PLAYLISTS_ENDPOINT = "https://api.spotify.com/v1/me/playlists";
-const randvalue = Math.floor((Math.random() * 100) + 1);
+var randvalue = Math.floor((Math.random() * 100) + 1);
 export default function MatchPlaylists() {
+
     const [data, setData] = useState({});
     useEffect(() => {
         if(localStorage.getItem("accessToken")){
@@ -206,9 +207,10 @@ export default function MatchPlaylists() {
                             flexDirection: "column"
                         }}>
                             <>{data?.items ? <Typography variant="h5" mb={1}>{imageurl? imageurl.name : null}</Typography> : null}
+            
                             </>
             
-                            <Avatar sx={{ width: 200, height: 200 }} src={imageurl ? imageurl.images.length >= 1 ? `${imageurl.images[0].url}` :null :null}>  </Avatar>
+                            <Avatar sx={{ width: 200, height: 200 }} src={imageurl ? imageurl.images.length >= 1 ? `${imageurl.images[0].url}` :null :null} onChange = {randvalue = Math.floor((Math.random() * 100) + 1) }>  </Avatar>
                             <Typography mt={1}>By {localStorage.getItem("profileName")}</Typography>
                         </Box>
                     </Grid>
